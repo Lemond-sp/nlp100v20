@@ -1,3 +1,3 @@
 str = "stressed"
-ans = str[::-1];
+ans = str[::-1]
 print(ans)
