@@ -7,7 +7,7 @@ ans = {}
 for i,word in enumerate(str):
   #先頭から何番目の単語か
   if i in one_ch:
-    ans[word[0]] = i
+    ans[word[0]] = i + 1
   else:
-    ans[word[:2]] = i
+    ans[word[:2]] = i + 1
 print(ans)
