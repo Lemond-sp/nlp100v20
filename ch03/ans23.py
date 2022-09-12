@@ -7,16 +7,15 @@ df = pd.read_json('jawiki-country.json',lines=True)
 uk = df.query('title == "イギリス"')['text'].values[0]
 
 pattern = r'''
-          ^
-          (={2,}) #キャプチャ対象
-          \s*     #空白
-          (.+?)   #任意の文字1文字以上、非貪欲
+          ^(\={2,})
           \s*
-          \1　　　 #後方参照(１番目のキャプチャ対象)
-          $
-          '''
+          (.+?)
+          \s*
+          (\={2,})
+          .*$'''
+#VERBOSEとトリプルクォーテーションでパターン中に改行(見やすく)
 sections = re.findall(pattern,uk,re.MULTILINE+re.VERBOSE)
-
+print(sections)
 for section in sections:
   level = len(section[0]) - 1
   print(f'{section[1]} {level}')
