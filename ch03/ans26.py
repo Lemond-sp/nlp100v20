@@ -31,7 +31,7 @@ for line in uk:
 #26
 '''
 ansは辞書型であるので、re.MULTILINE不要
-
+ちなみに enumerateだと インデックス+key
 '''
 pattern = r'\'{2,5}'
 ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
