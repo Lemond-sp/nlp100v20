@@ -1,14 +1,8 @@
-#https://ja.wikipedia.org/wiki/Template:基礎情報_国
-#https://www.ipentec.com/document/software-regular-expression-difference-question-equal-and-question-colon
-#要復習
 '''
-{{基礎情報 国
-|自治領等 =
-|hogehoge =
-という形(改行が含まれていることに注意)
-}}
+「'」２つ３つ５つ
+25の結果から開始
 '''
-
+#25の処理
 import pandas as pd
 import re
 
@@ -32,4 +26,15 @@ for line in uk:
   r = re.search(pattern,line)
   if r:
     ans[r[1]] = r[2]
-print(ans)
+#print(ans)
+
+#26
+'''
+ansは辞書型であるので、re.MULTILINE不要
+
+'''
+pattern = r'\'{2,5}'
+ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
+#print(ans)
+for k,v in ans.items():
+  print(k + ':' + v)
