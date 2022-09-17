@@ -1,6 +1,7 @@
 '''
 26の結果から開始
 内部リンクの除去
+https://ja.wikipedia.org/wiki/Help:早見表
 '''
 #25の処理
 import pandas as pd
@@ -20,7 +21,11 @@ for line in uk:
 #26の処理
 pattern = r'\'{2,5}'
 ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
-for k,v in ans.items():
-  print(k + ':' + v)
-
+#print(ans)
 #27の処理
+pattern = r'\[{2}'
+ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
+
+pattern = r'\]{2}'
+ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
+print(ans)
