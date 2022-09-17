@@ -23,9 +23,13 @@ pattern = r'\'{2,5}'
 ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
 #print(ans)
 #27の処理
+'''
+１行中に対象パターンが複数の場合、どうすればいいのか
+'''
 pattern = r'\[{2}'
-ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
+ans = {k: re.sub(pattern,'',v,10,re.MULTILINE) for k,v in ans.items()}
 
 pattern = r'\]{2}'
-ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
-print(ans)
+ans = {k: re.sub(pattern,'',v,10,re.MULTILINE) for k,v in ans.items()}
+for k,v in ans.items():
+  print(f'{k} : {v}')
