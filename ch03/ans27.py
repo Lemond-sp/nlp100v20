@@ -1,6 +1,7 @@
 '''
 26の結果から開始
 内部リンクの除去
+((未解決))
 https://ja.wikipedia.org/wiki/Help:早見表
 '''
 #25の処理
