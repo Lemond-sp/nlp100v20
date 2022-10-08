@@ -1,15 +1,39 @@
+from cgitb import text
 import re
-text = '表層形  品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用型,活用形,原形,読み,発音'
-print(text)
-print('-'*50)
-f1 = text.split('\t')
-print(f1)
+#text = '表層形  品詞,品詞細分類1,品詞細分類2,品詞細分類3,活用型,活用形,原形,読み,発音'
+#複数のタブがある場合
+# 1,2,3,7
+with open('./neko.txt.mecab','r') as f:
+  text_dict = []
+  sentence_dict = []
+  n = 0
+  # f.read:改行も含めた文字列
+  # f.readlines:改行コードを区切って１行ごとに分解されたリスト
+  for line in f.readlines():
+    print(line)
+    n += 1
+    if n == 10:
+      break
+ '''
+ output
+ EOS\n や 無駄な改行 がある
+ 一      名詞,数,*,*,*,*,一,イチ,イチ
 
-print('-'*50)
-'''
-複数の条件で分割 re.split
-謎の空白の要素が生成されるので removeで無理矢理消した
-'''
-f2 = re.split('[  ,]',text)
-f2.remove('')
-print(f2)
+
+
+        記号,一般,*,*,*,*,*
+
+EOS
+
+
+
+        記号,一般,*,*,*,*,*
+
+EOS
+
+　      記号,空白,*,*,*,*,　,　,　
+
+吾輩    名詞,代名詞,一般,*,*,*,吾輩,ワガハイ,ワガハイ
+
+は      助詞,係助詞,*,*,*,*,は,ハ,ワ
+ '''
