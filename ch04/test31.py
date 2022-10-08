@@ -8,26 +8,23 @@ import itertools
 random.seed(42)
 
 # sum関数
-x1 = [[random.randint(0,10) for i in range(5)]]
-print(x1)
+x1 = [[random.randint(0,10) for i in range(50000)]]
 
 start = time.time()
 s1 = sum(x1,[])
 sum_time = time.time() - start
 
 # itertools
-x2 = [[random.randint(0,10) for i in range(5)]]
+x2 = [[random.randint(0,10) for i in range(50000)]]
 start = time.time()
 s2 = itertools.chain.from_iterable(x2)
 iter_time = time.time() - start
 
 print(f'sum func: {sum_time}\nitertools: {iter_time}\
-      \nsum関数はitertoolsの{sum_time / iter_time}倍の計算時間')
+      \nsum関数はitertoolsの{(sum_time / iter_time):.3f}倍の計算時間')
 
 '''
-[[10, 1, 0, 4, 3]]
-sum func: 1.9073486328125e-06
-itertools: 0.000186920166015625      
-sum関数はitertoolsの0.01020408163265306倍の計算時間
-sum関数の方が早い？(記事中ではitertoolsの方が高速らしい)
+sum func: 0.00011014938354492188
+itertools: 4.0531158447265625e-06      
+sum関数はitertoolsの27.176倍の計算時間
 '''
