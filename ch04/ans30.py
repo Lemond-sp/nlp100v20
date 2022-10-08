@@ -22,6 +22,7 @@ with open('./neko.txt.mecab','r') as f:
     # １文
     elif line != 'EOS\n':
       node = line.split('\t')
+      # surfaceが空白の場合除外
       if node[0] == '':
         continue
       # surface 以外はnode[1]
@@ -34,8 +35,10 @@ with open('./neko.txt.mecab','r') as f:
       }
       sentence_dict.append(word_dict)
     # 追加
-    text_dict.append(sentence_dict)
-    sentence_dict = []
+    # 追加文が無い場合は除外(elseだと、つまり無い場合も追加したら9210→9964)
+    elif len(sentence_dict) != 0:
+      text_dict.append(sentence_dict)
+      sentence_dict = []
 
   print(len(text_dict))
   for i in text_dict[:5]:
