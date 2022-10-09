@@ -37,6 +37,7 @@ m = []
 for sentence in sentence_dict:
   if sentence['pos'] == '名詞':
     n.append(sentence['surface'])
+    # ここが微妙
     if len(m)==1 and len(n) == 2:
       noun_connect.append(n)
   elif sentence['surface'] == 'の':
