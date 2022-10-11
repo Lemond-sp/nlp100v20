@@ -24,6 +24,7 @@ print(f'sum func: {sum_time}\nitertools: {iter_time}\
       \nsum関数はitertoolsの{(sum_time / iter_time):.3f}倍の計算時間')
 
 '''
+*rangeの値が少ない場合はsumの方が速い
 sum func: 0.00011014938354492188
 itertools: 4.0531158447265625e-06      
 sum関数はitertoolsの27.176倍の計算時間
