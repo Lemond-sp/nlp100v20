@@ -32,16 +32,29 @@ with open('./neko.txt.mecab','r') as f:
 import itertools
 verb_dict = []
 sentence_dict = itertools.chain.from_iterable(text_dict)
+# 語彙セット
 surface_dict = set()
+# 語彙セット(重複あり)
 surface = []
 # 単語のセット
 for sentence in sentence_dict:
   surface_dict.add(sentence['surface'])
   surface.append(sentence['surface'])
 
-# 出現頻度
+# 語彙数
 print(f'語彙数：{len(surface_dict)}')
 
-import collections
-c = collections.Counter(surface)
-print(c.most_common(10))
+
+from collections import defaultdict
+word_freq = defaultdict(int)
+
+for word in surface:
+  word_freq[word] += 1
+# 辞書のvalueを基準に 降順にソート
+# keyを基準にする場合、hoge = sorted(hoge.items())
+word_freq = sorted(word_freq.items(),key = lambda word:word[1],reverse=True)
+print(word_freq[:10])
+'''
+語彙数：13584
+[('の', 9194), ('。', 7486), ('て', 6868), ('、', 6772), ('は', 6420), ('に', 6243), ('を', 6071), ('と', 5508), ('が', 5337), ('た', 3988)]
+'''
