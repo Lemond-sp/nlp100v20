@@ -1,7 +1,7 @@
 '''
 http://taku910.github.io/cabocha/
 ai.ja.txt に対して 係受け解析を行う
-% cat ai.ja.txt | cabocha -f1 > ai.txt.cabocha
+% cat ai.ja.txt | cabocha -f1 > ai.txt.parsed
 -f1で、計算機に処理しやすいフォーマットで出力
 (ex)
 cabocha[enter]
