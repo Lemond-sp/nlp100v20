@@ -8,6 +8,7 @@
 
 class Chunk:
   def __init__(self,morphs,dst):
+    # 形態素のリスト(morphs)
     self.morphs = morphs
     # 係り先
     self.dst = dst
@@ -27,12 +28,15 @@ class Morph:
 class Sentence:
   def __init__(self,chunks):
     self.chunks = chunks
+    # i が文節番号
     for i ,chunk in enumerate(self.chunks):
+      # 係先があるか
       if chunk.dst not in [None,-1]:
         self.chunks[chunk.dst].srcs.append(i)
 
 filename = 'ai.ja/ai.ja.txt.parsed'
 sentences = []
+# chunkのインスタンス変数の集合
 chunks = []
 morphs = []
 
