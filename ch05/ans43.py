@@ -1,16 +1,13 @@
 '''
-40に加えて、分節を示すクラスChunkの実装
-形態素（Morphオブジェクト）のリスト（morphs），
-係り先文節インデックス番号（dst），係り元文節インデックス番号のリスト（srcs）をメンバ変数
-冒頭の説明文の文節の文字列と係り先を表示
+名詞を含む文節が動詞を含む文節に係るものを抽出
+名詞を含む文節が，動詞を含む文節に係るとき，
+これらをタブ区切り形式で抽出せよ．
+ただし，句読点などの記号は出力しないようにせよ．
 '''
-
-
 class Chunk:
   def __init__(self,morphs,dst):
-    # 形態素のリスト(morphs)
     self.morphs = morphs
-    # 係り先
+    # 係り先(-1もある 17Dとかの17)
     self.dst = dst
     # 係り元文節の保存
     self.srcs = []
@@ -20,20 +17,19 @@ class Morph:
   def __init__(self,block):
     surface,attr = block.split('\t')
     attr = attr.split(',')
-    self.surface = surface
+    # 句読点などの記号はNG
+    self.surface = '' if attr[0] == '記号' else surface
     self.base = attr[6]
+    # 記号は除去
     self.pos = attr[0]
     self.pos1 = attr[1]
 
 class Sentence:
   def __init__(self,chunks):
     self.chunks = chunks
-    # i が文節番号
-    # そもそもEOSで文節ごとに分割しているため、
-    # その文節を超えた i は指定されることはない。
     for i ,chunk in enumerate(self.chunks):
-      # 係先があるか
       if chunk.dst not in [None,-1]:
+        # chunks の dst番号対象
         self.chunks[chunk.dst].srcs.append(i)
 
 filename = 'ai.ja/ai.ja.txt.parsed'
@@ -51,6 +47,7 @@ with open(filename) as f:
         morphs = []
       # 文字列の末尾部分を除去
       # 引数より除去される文字集合
+      # 17D → 17
       dst = int(block.split(' ')[2].rstrip('D'))
     # Add Morph
     elif block != 'EOS\n':
@@ -62,11 +59,17 @@ with open(filename) as f:
       sentences.append(Sentence(chunks))
       morphs = []
       chunks = []
-      dst = None # 初期化
+      dst = None
 
+'''
+係り元の文節と係り先の文節のテキストをタブ区切り形式ですべて抽出せよ．
+品詞が記号の場合、無視(空文字列)
++ 名詞から動詞
+'''
 for chunk in sentences[2].chunks:
-  print([morph.surface for morph in chunk.morphs], chunk.dst, chunk.srcs)
-'''
-['人工', '知能'] 17 []
-['（', 'じん', 'こうち', 'のう', '、', '、'] 17 []
-'''
+  # 係り元
+  modifier = ''.join([morph.surface for morph in chunk.morphs if morph.pos == '名詞'])
+  # 係り先
+  modification = ''.join([morph.surface for morph in sentences[2].chunks[chunk.dst].morphs  if morph.pos == '動詞'])
+  if modifier and modification:
+    print(modifier,modification,sep='\t')
