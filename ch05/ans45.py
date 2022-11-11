@@ -69,6 +69,9 @@ with open(filename) as f:
 '''
 # modiferをkeyとしてmodificationをリストのvalueにする
 # forで追加後改めて表示する
+
+from collections import defaultdict
+tuple_list = []
 sentences = sentences[7].chunks
 for chunk in sentences:
   # 係り元
@@ -76,4 +79,30 @@ for chunk in sentences:
   # 係り先
   modification = ''.join([morph.surface for morph in sentences[chunk.dst].morphs if morph.pos == '動詞'])
   if modifier and modification:
-    print(modification,modifier,sep='\t')
+    tuple_list.append((modification,modifier))
+    #print(modification,modifier,sep='\t')
+
+ans = defaultdict(list)
+for k,v in tuple_list:
+  ans[k].append(v)
+# valueを辞書順にソート
+ans = sorted(ans.items(),key=lambda x:x[1])
+print(ans)
+print('-'*50)
+for i in ans:
+  print(i[0],*i[1],sep=' ')
+
+'''
+なり が と
+出される が に
+持つ が に
+されいる が は が
+集め が を
+ある て てが は に も
+呼ばれる と
+知られいる としては も
+させよ に を
+する において
+行う を に を
+し を を に
+'''
