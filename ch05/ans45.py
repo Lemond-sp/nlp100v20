@@ -85,10 +85,10 @@ for chunk in sentences:
 ans = defaultdict(list)
 for k,v in tuple_list:
   ans[k].append(v)
-# valueを辞書順にソート
+# valueを辞書順にソート
 ans = sorted(ans.items(),key=lambda x:x[1])
-print(ans)
-print('-'*50)
+#print(ans)
+#print('-'*50)
 for i in ans:
   print(i[0],*i[1],sep=' ')
 
