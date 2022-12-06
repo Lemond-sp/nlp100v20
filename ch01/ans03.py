@@ -1,10 +1,10 @@
 import re
 
-str = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
-print(str)
-str = re.sub("[,|.]","",str)
-print(str)
-ans = str.split()
+sentence = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+print(sentence)
+sentence = re.sub("[,|.]","",sentence)
+print(sentence)
+ans = sentence.split()
 print(ans)
 #各単語の文字数
 ans = [len(i) for i in ans]
