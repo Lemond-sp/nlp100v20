@@ -4,8 +4,8 @@ def cipher(lst):
       lst[i] = 219 - ord(lst[i])
   return lst
 
-str = 'Ab12'
-lst = list(str)
+chr = 'Ab12'
+lst = list(chr)
 print(cipher(lst))
 '''
 文字列は不変 immutable

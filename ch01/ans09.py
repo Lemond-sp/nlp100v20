@@ -1,8 +1,8 @@
 import random
-str = "I couldn’t believe that I could actually understand what I was reading : the phenomenal power of the human mind ."
-str = str.split()
+sentence = "I couldn’t believe that I could actually understand what I was reading : the phenomenal power of the human mind ."
+sentence = sentence.split()
 ans = []
-for word in str:
+for word in sentence:
   if len(word) > 4:
     #先頭と末尾の文字以外の取り出し・shuffleはリスト化
     mid = list(word[1:-1])
