@@ -14,4 +14,10 @@ for word in sent_list:
     ans.append(word)
   else:
     ans.append(word)
+print(sentence)
 print(' '.join(ans))
+
+'''
+I couldn’t believe that I could actually understand what I was reading : the phenomenal power of the human mind .
+I cdulno’t beievle that I cuold atulcaly uanentsdrd what I was rdaeing : the penaoehnml pweor of the haumn mind .
+'''
