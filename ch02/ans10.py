@@ -8,5 +8,5 @@ print(line_size)
 '''
 wc -l popular-names.txt
 wc ファイル名なら
-行数、単語数、バイト数 を表示
+行数(改行数 -l)、単語数(-w)、バイト数(-c) を表示
 '''
