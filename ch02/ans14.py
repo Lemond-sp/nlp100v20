@@ -1,6 +1,6 @@
 import pandas as pd
 import sys
-args = sys.argv
+args = sys.argv # コマンドライン引数の設定
 
 df = pd.read_csv('popular-names.txt',sep='\t',header=None)
 #args[0]はpyファイル名
