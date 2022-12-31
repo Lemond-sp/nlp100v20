@@ -5,5 +5,8 @@ df = pd.read_csv('popular-names.txt',sep='\t',header=None)
 print(df.iloc[:,0].unique())
 
 '''
-uniq popular-names.txt | cut -f 1
+cut  : 横方向に分割する
+sort : 昇順
+uniq : 重複している行の削除
+cut -f 1 popular-names.txt | sort | uniq
 '''

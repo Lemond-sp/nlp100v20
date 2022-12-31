@@ -6,7 +6,12 @@ df = df.sort_values(2,ascending=False)
 print(df)
 
 '''
-sort -k 3 -r popular-names.txt
-k:列指定
-r:降順
+対象列が文字列として認識され、数値としてソーティングされていなかった
+sort -rnk 3 popular-names.txt | head -n 5
+k : 列指定
+r : 降順
+n : 文字列を数値と見なして並べ替える
+
+-rnk -nrk としてもいい
+-(１つ以上のオプション)(パラメータを使うオプション) [パラメータ] の順で実行する
 '''

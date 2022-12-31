@@ -12,5 +12,6 @@ for i in range(n):
 
 '''
 split -n 5 popular-names.txt
-macOSでは オプションnがない
+macOSでは オプションnがないため、-lで行う
+split -l 5 popular-names.txt
 '''
