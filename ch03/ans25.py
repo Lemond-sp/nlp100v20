@@ -18,7 +18,7 @@ uk = df.query('title == "イギリス"')['text'].values[0]
 uk = uk.split('\n')
 # ２つのパターンを抽出(capture group)するので、
 # そもそも要素がないものは弾かれる
-pattern = re.compile('\|(.+?)\s*=\s*(.+)')
+pattern = re.compile('\|(.+?)\s=\s(.+)')
 ans = {}
 '''
 re.search

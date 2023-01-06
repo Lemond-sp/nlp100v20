@@ -1,6 +1,9 @@
 '''
 26の結果から開始
 内部リンクの除去
+[[記事名]]
+[[記事名|表示文字]]
+[[記事名#節名|表示文字]]
 ＊未解決＊
 https://ja.wikipedia.org/wiki/Help:早見表
 '''
@@ -12,7 +15,7 @@ df = pd.read_json('jawiki-country.json',lines=True)
 uk = df.query('title == "イギリス"')['text'].values[0]
 uk = uk.split('\n')
 
-pattern = re.compile('\|(.+?)\s*=\s*(.+)')
+pattern = re.compile('\|(.+?)\s*=\s(.+)')
 ans = {}
 for line in uk:
   r = re.search(pattern,line)
