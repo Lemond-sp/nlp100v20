@@ -1,4 +1,6 @@
-#[[ファイル:Wikipedia-logo-v2-ja.png|thumb|説明文]]
+# [[ファイル:Wikipedia-logo-v2-ja.png|thumb|説明文]]
+# Wikipedia-logo-v2-ja.pngがほしい
+
 import pandas as pd
 import re
 
@@ -10,7 +12,7 @@ pattern = r'''
           ファイル
           :
           (.+?)
-          \|
+          \| # .+?と\|で仕切りを入れる
           '''
 file_name = re.findall(pattern,uk,re.MULTILINE+re.VERBOSE)
 for fn in file_name:

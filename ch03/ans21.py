@@ -9,6 +9,7 @@ import re
 df = pd.read_json('jawiki-country.json',lines=True)
 uk = df.query('title == "イギリス"')['text'].values[0]
 # findall :マッチした「文字列のリスト」を返す
+# capture group
 uk_list = re.findall(r'^(\[\[Category:.*\]\])$',uk,re.MULTILINE+re.VERBOSE)
 print(uk_list)
 '''
