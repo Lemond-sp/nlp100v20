@@ -16,7 +16,8 @@ df = pd.read_json('jawiki-country.json',lines=True)
 uk = df.query('title == "イギリス"')['text'].values[0]
 #\nでリスト化しているので、今回はre.DOTALL、MULTILINE 不必要
 uk = uk.split('\n')
-
+# ２つのパターンを抽出(capture group)するので、
+# そもそも要素がないものは弾かれる
 pattern = re.compile('\|(.+?)\s*=\s*(.+)')
 ans = {}
 '''
@@ -33,3 +34,12 @@ for line in uk:
   if r:
     ans[r[1]] = r[2]
 print(ans)
+
+'''
+1: re.finditer
+２重ループになるのでおすすめはできない
+for line in uk:
+  itr = re.finditer(pattern,line)
+  for m in itr:
+    ans[m.group(1)] = m.group(2)
+'''
