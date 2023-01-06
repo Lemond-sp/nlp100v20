@@ -11,17 +11,8 @@ uk = df.query('title == "イギリス"')['text'].values[0]
 #\nでリスト化しているので、今回はre.DOTALL、MULTILINE 不必要
 uk = uk.split('\n')
 
-pattern = re.compile('\|(.+?)\s*=\s*(.+)')
+pattern = re.compile('\|(.+?)\s=\s(.+)')
 ans = {}
-'''
-re.search
-マッチしない場合、None
-r[0]:パターンとして抽出された全体
-r[i]:i番目パターンとして抽出されたもの
-
-re.matchは先頭の文字列からチェックすることを前提
-^を指定しなくても、大丈夫
-'''
 for line in uk:
   r = re.search(pattern,line)
   if r:
@@ -33,8 +24,19 @@ for line in uk:
 ansは辞書型であるので、re.MULTILINE不要
 ちなみに enumerateだと インデックス+key
 '''
-pattern = r'\'{2,5}'
-ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
-#print(ans)
+# pattern = r'\'{2,5}' # pattern = r"'+"でもよかった
+# pattern = "'+"
+
+r = re.compile("'+")
+ans = {k: r.sub('',v) for k,v in ans.items()}
+
 for k,v in ans.items():
   print(k + ':' + v)
+
+
+"""
+略名:イギリス
+日本語国名:グレートブリテン及び北アイルランド連合王国
+公式国名:{{lang|en|United Kingdom of Great Britain and Northern Ireland}}<ref>英語以外での正式国名:<br />
+国旗画像:Flag of the United Kingdom.svg
+"""
