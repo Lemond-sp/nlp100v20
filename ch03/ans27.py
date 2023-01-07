@@ -7,7 +7,7 @@
 ＊未解決＊
 https://ja.wikipedia.org/wiki/Help:早見表
 '''
-#25の処理
+#25 :テンプレートの抽出、辞書作成
 import pandas as pd
 import re
 
@@ -22,14 +22,11 @@ for line in uk:
   if r:
     ans[r[1]] = r[2]
 
-#26の処理
+#26 :強調マークアップの除去
 pattern = r'\'{2,5}'
 ans = {k: re.sub(pattern,'',v) for k,v in ans.items()}
-#print(ans)
-#27の処理
-'''
-１行中に対象パターンが複数の場合、どうすればいいのか
-'''
+
+#27 :内部リンクの除去
 pattern = r'\[{2}'
 ans = {k: re.sub(pattern,'',v,10,re.MULTILINE) for k,v in ans.items()}
 
@@ -37,3 +34,12 @@ pattern = r'\]{2}'
 ans = {k: re.sub(pattern,'',v,10,re.MULTILINE) for k,v in ans.items()}
 for k,v in ans.items():
   print(f'{k} : {v}')
+"""
+r = re.compile('\[\[(.+\||)(.+?)\]\]')
+ans = {k: r.sub(r'\2', v) for k, v in dc.items()}
+
+# キャプチャグループの2番目にreplace
+# \<number> or \g<number>
+https://micropython-docs-ja.readthedocs.io/ja/latest/library/re.html#re.sub
+
+"""

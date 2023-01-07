@@ -33,8 +33,8 @@ for line in uk:
   r = re.search(pattern,line)
   if r:
     ans[r[1]] = r[2]
-print(ans)
-
+for k,v in ans.items():
+  print(f'{k} : {v}')
 '''
 1: re.finditer
 ２重ループになるのでおすすめはできない
