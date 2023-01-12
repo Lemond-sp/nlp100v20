@@ -5,7 +5,7 @@
 冒頭の説明文の文節の文字列と係り先を表示
 '''
 
-
+# 文節
 class Chunk:
   def __init__(self,morphs,dst):
     # 形態素のリスト(morphs)
@@ -25,6 +25,7 @@ class Morph:
     self.pos = attr[0]
     self.pos1 = attr[1]
 
+# 文節(chunks)リスト
 class Sentence:
   def __init__(self,chunks):
     self.chunks = chunks
@@ -34,6 +35,7 @@ class Sentence:
     for i ,chunk in enumerate(self.chunks):
       # 係先があるか
       if chunk.dst not in [None,-1]:
+        # ex)i番目に17Dがあれば、17のchunk.srcsにiを格納
         self.chunks[chunk.dst].srcs.append(i)
 
 filename = 'ai.ja/ai.ja.txt.parsed'
