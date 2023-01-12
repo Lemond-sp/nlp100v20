@@ -1,13 +1,15 @@
 '''
 動詞を述語，動詞に係っている文節の助詞を格と考え，述語と格をタブ区切り形式で出力せよ．
-・動詞を含む文節において，最左の動詞の基本形を述語とする
-・述語に係る助詞を格とする
+・動詞を含む文節において，最左の"動詞の基本形"を述語とする
+・述語に係る"助詞"を格とする
 ・述語に係る助詞（文節）が複数あるときは，すべての助詞をスペース区切りで辞書順に並べる
 '''
+# 文節
 class Chunk:
   def __init__(self,morphs,dst):
+    # 形態素のリスト(morphs)
     self.morphs = morphs
-    # 係り先(-1もある 17Dとかの17)
+    # 係り先
     self.dst = dst
     # 係り元文節の保存
     self.srcs = []
@@ -17,20 +19,22 @@ class Morph:
   def __init__(self,block):
     surface,attr = block.split('\t')
     attr = attr.split(',')
-    # 句読点などの記号はNG
     self.surface = surface
-    #self.surface = '' if attr[0] == '記号' else surface
     self.base = attr[6]
-    # 記号は除去
     self.pos = attr[0]
     self.pos1 = attr[1]
 
+# 文節(chunks)リスト
 class Sentence:
   def __init__(self,chunks):
     self.chunks = chunks
+    # i が文節番号
+    # そもそもEOSで文節ごとに分割しているため、
+    # その文節を超えた i は指定されることはない。
     for i ,chunk in enumerate(self.chunks):
+      # 係先があるか
       if chunk.dst not in [None,-1]:
-        # chunks の dst番号対象
+        # ex)i番目に17Dがあれば、17のchunk.srcsにiを格納
         self.chunks[chunk.dst].srcs.append(i)
 
 filename = 'ai.ja/ai.ja.txt.parsed'
@@ -48,7 +52,6 @@ with open(filename) as f:
         morphs = []
       # 文字列の末尾部分を除去
       # 引数より除去される文字集合
-      # 17D → 17
       dst = int(block.split(' ')[2].rstrip('D'))
     # Add Morph
     elif block != 'EOS\n':
@@ -60,49 +63,30 @@ with open(filename) as f:
       sentences.append(Sentence(chunks))
       morphs = []
       chunks = []
-      dst = None
+      dst = None # 初期化
 
 '''
 係り元の文節と係り先の文節のテキストをタブ区切り形式ですべて抽出せよ．
 品詞が記号の場合、無視(空文字列)
 + 名詞から動詞
 '''
-# modiferをkeyとしてmodificationをリストのvalueにする
-# forで追加後改めて表示する
 
-from collections import defaultdict
-tuple_list = []
-sentences = sentences[7].chunks
-for chunk in sentences:
-  # 係り元
-  modifier = ''.join([morph.base for morph in chunk.morphs if morph.pos == '助詞'])
-  # 係り先
-  modification = ''.join([morph.surface for morph in sentences[chunk.dst].morphs if morph.pos == '動詞'])
-  if modifier and modification:
-    tuple_list.append((modification,modifier))
-    #print(modification,modifier,sep='\t')
-
-ans = defaultdict(list)
-for k,v in tuple_list:
-  ans[k].append(v)
-# valueを辞書順にソート
-ans = sorted(ans.items(),key=lambda x:x[1])
-#print(ans)
-#print('-'*50)
-for i in ans:
-  print(i[0],*i[1],sep=' ')
+with open("./result45.txt", "w") as f:
+  for i in range(len(sentences)):
+    for chunk in sentences[i].chunks:
+      for morph in chunk.morphs:
+        if morph.pos == "動詞": 
+          particles = []
+          for src in chunk.srcs:
+            particles += [morph.base for morph in sentences[i].chunks[src].morphs if morph.pos == "助詞"]
+          if len(particles) > 1:
+            particles = set(particles)
+            particles = sorted(list(particles))
+            form = " ".join(particles)
+            print(f"{morph.base}\t{form}", file=f)
 
 '''
-なり が と
-出される が に
-持つ が に
-されいる が は が
-集め が を
-ある て てが は に も
-呼ばれる と
-知られいる としては も
-させよ に を
-する において
-行う を に を
-し を を に
+cat ./result45.txt | sort |uniq -c | sort -nr |head -n 5
+cat ./result45.txt |grep '行う'| sort |uniq -c | sort -nr |head -n 5
+
 '''
