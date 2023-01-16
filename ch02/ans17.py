@@ -2,7 +2,7 @@ import pandas as pd
 
 df = pd.read_csv('popular-names.txt',sep='\t',header=None)
 #df[0]でも
-print(df.iloc[:,0].unique())
+print(df.iloc[:,0].unique()) # set(df[0]) でもおk
 
 '''
 cut  : 横方向に分割する
