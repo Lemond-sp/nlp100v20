@@ -16,15 +16,15 @@ df = pd.read_csv('NewsAggregatorDataset/newsCorpora.csv',\
 
 cols = ["Reuters","Huffington Post","Businessweek","Contactmusic.com","Daily Mail"]
 
-df_pub = df[df['publisher'].isin(cols)]
+df = df[df['publisher'].isin(cols)]
 # print(df.query(f'publisher == {cols}'))
 # queryではカラム名に「.」「 」「数字」を入れてはいけない
 
-df_pub = df_pub.sample(frac=1, random_state=42).reset_index(drop=True)
+df_pub = df.sample(frac=1, random_state=42).reset_index(drop=True)
 
 
 # train:test:dev = 8:1:1
-train, test = train_test_split(df, test_size=0.2, random_state=42, stratify=df['category'])
+train, test = train_test_split(df_pub, test_size=0.2, random_state=42, stratify=df_pub['category'])
 test,dev = train_test_split(test,test_size=0.5,random_state=42,stratify=test['category'])
 
 # dataframe to txt
@@ -35,6 +35,7 @@ dev.to_csv('dev.txt',columns=['category','title'],sep='\t',index=None)
 
 # 各カテゴリの事例数を確認せよ．
 print('train value_counts')
+print(train.shape)
 print(train['category'].value_counts())
 print('test value_counts')
 print(test['category'].value_counts())
