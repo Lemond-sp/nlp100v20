@@ -8,7 +8,7 @@ FILENAME #1: newsCorpora.csv (102.297.000 bytes)
 DESCRIPTION: News pages
 FORMAT: ID \t TITLE \t URL \t PUBLISHER \t CATEGORY \t STORY \t HOSTNAME \t TIMESTAMP
 TITLE : ニュースの見出し
-CATEGORY : ニュースカテゴリ
+CATEGORY	News category (b = business, t = science and technology, e = entertainment, m = health)
 '''
 df = pd.read_csv('NewsAggregatorDataset/newsCorpora.csv',\
   names=['id','title','url','publisher','category','story','hostname','timestamp']\
@@ -33,3 +33,8 @@ train.to_csv('train.txt',columns=['category','title'],sep='\t',index=None)
 test.to_csv('test.txt',columns=['category','title'],sep='\t',index=None)
 dev.to_csv('dev.txt',columns=['category','title'],sep='\t',index=None)
 
+# 各カテゴリの事例数を確認せよ．
+print('train value_counts')
+print(train['category'].value_counts())
+print('test value_counts')
+print(test['category'].value_counts())
