@@ -33,7 +33,7 @@ train.to_csv('train.txt',columns=['category','title'],sep='\t',index=None)
 test.to_csv('test.txt',columns=['category','title'],sep='\t',index=None)
 dev.to_csv('dev.txt',columns=['category','title'],sep='\t',index=None)
 
-# 各カテゴリの事例数を確認せよ．
+# Check the number of cases in each category
 print('train value_counts')
 print(train.shape)
 print(train['category'].value_counts())
