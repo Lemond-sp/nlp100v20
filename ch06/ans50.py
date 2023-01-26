@@ -29,9 +29,9 @@ test,dev = train_test_split(test,test_size=0.5,random_state=42,stratify=test['ca
 
 # dataframe to txt
 # sep='\t'
-train.to_csv('train.txt',columns=['category','title'],sep='\t',index=None)
-test.to_csv('test.txt',columns=['category','title'],sep='\t',index=None)
-dev.to_csv('valid.txt',columns=['category','title'],sep='\t',index=None)
+train.to_csv('train.txt',columns=['category','title'],sep='\t',index=False, header=None)
+test.to_csv('test.txt',columns=['category','title'],sep='\t',index=False, header=None)
+dev.to_csv('valid.txt',columns=['category','title'],sep='\t',index=False, header=None)
 
 # Check the number of cases in each category
 print('train value_counts')
