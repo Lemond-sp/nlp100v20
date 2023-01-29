@@ -29,6 +29,11 @@ test,dev = train_test_split(test,test_size=0.5,random_state=42,stratify=test['ca
 
 # dataframe to txt
 # sep='\t'
+
+train['category'] = train['category'].map({'b': 0, 'e': 1, 't': 2, 'm': 3})
+test['category'] = test['category'].map({'b': 0, 'e': 1, 't': 2, 'm': 3})
+dev['category'] = dev['category'].map({'b': 0, 'e': 1, 't': 2, 'm': 3})
+
 train.to_csv('train.txt',columns=['category','title'],sep='\t',index=False, header=None)
 test.to_csv('test.txt',columns=['category','title'],sep='\t',index=False, header=None)
 dev.to_csv('valid.txt',columns=['category','title'],sep='\t',index=False, header=None)
