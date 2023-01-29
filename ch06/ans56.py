@@ -2,6 +2,7 @@
 52で学習したロジスティック回帰モデルの適合率，再現率，F1スコアを，評価データ上で計測せよ
 カテゴリごとに適合率，再現率，F1スコアを求め，カテゴリごとの性能を
 マイクロ平均（micro-average）とマクロ平均（macro-average）で統合
+https://scikit-learn.org/stable/modules/generated/sklearn.metrics.recall_score.html
 '''
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
