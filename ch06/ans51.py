@@ -2,6 +2,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 import numpy as np
+import pickle
 
 train = pd.read_table('train.txt',header=None)
 test = pd.read_table('test.txt',header=None)
@@ -19,3 +20,9 @@ x_valid = vectorizer.transform(valid_text)
 np.savetxt("train.feature.txt",x_train.toarray())
 np.savetxt("test.feature.txt",x_test.toarray())
 np.savetxt("valid.feature.txt",x_valid.toarray())
+
+# 語彙を保存(57より)
+vocab = vectorizer.get_feature_names()
+# モデルを保存する
+filename = '52_vocab.sav'
+pickle.dump(vocab, open(filename, 'wb'))
