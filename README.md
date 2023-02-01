@@ -3,5 +3,7 @@
 
 - Python 3.8.8
 - mecab 0.996
+- sklearn 0.24.1
+- gensim 4.3.0
 
 Welcome to Issues・Discussions !
