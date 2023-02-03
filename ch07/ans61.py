@@ -9,7 +9,7 @@ def main():
   v1 = model['United_States']
   v2 = model['U.S.']
   print(cos_sim(v1,v2)) # 0.7310775
-
+  # print(model.similarity('United_States', 'U.S.')) #0.73107743
 def cos_sim(v1,v2):
   return np.dot(v1,v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
 
