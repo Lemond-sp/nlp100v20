@@ -4,9 +4,7 @@ import gensim
 from gensim.models import KeyedVectors
 
 def main():
-  #model = gensim.models.KeyedVectors.load_word2vec_format("GoogleNews-vectors-negative300.bin")
-  #model = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin')
-  #model = gensim.models.Word2Vec.load('GoogleNews-vectors-negative300.bin')
+  
   model = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
   print(model['United_States'])
   print(model['United_States'].shape) # (300,)
