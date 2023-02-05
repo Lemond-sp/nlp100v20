@@ -46,6 +46,6 @@ for sentence in sentence_dict:
     n = []
     m = []
 
-print(noun_connect)
+# print(noun_connect)
 for noun_c in noun_connect:
-    print(*noun_c)
+    print(f'{noun_c[0]}の{noun_c[1]}')
