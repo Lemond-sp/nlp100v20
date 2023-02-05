@@ -45,7 +45,6 @@ def main():
 
     print(len(text_dict))
     for i in text_dict[:5]: # 5個分の文章
-      n += 1
       for j in i:
         print(j)
       print(' ')
