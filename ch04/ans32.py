@@ -1,3 +1,5 @@
+# 動詞の基本形
+
 with open('./neko.txt.mecab','r') as f:
   text_dict = []
   sentence_dict = []
@@ -37,7 +39,7 @@ sentence_dict = itertools.chain.from_iterable(text_dict)
 
 for sentence in sentence_dict:
   if sentence['pos'] == '動詞':
-    verb_dict.append(sentence['base'])
+    verb_dict.append(sentence['base']) # 基本形
 # 28906
 print(len(verb_dict))
 print(verb_dict)

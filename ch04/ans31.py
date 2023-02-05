@@ -1,3 +1,4 @@
+# 動詞の表層
 with open('./neko.txt.mecab','r') as f:
   text_dict = []
   sentence_dict = []
