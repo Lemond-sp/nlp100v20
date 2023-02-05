@@ -30,6 +30,7 @@ with open('./neko.txt.mecab','r') as f:
       sentence_dict = []
 
 #ans34
+# 名詞の連接を最長一致で表示
 
 import itertools
 verb_dict = []
@@ -48,4 +49,5 @@ for sentence in sentence_dict:
     noun_connect = []
     continue
 
-print(noun_seq)
+for max_noun in noun_seq:
+  print(*max_noun)
