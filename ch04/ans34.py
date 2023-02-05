@@ -45,7 +45,7 @@ for sentence in sentence_dict:
   elif len(noun_connect) > 1:
     noun_seq.append(noun_connect)
     noun_connect = []
-  else:
+  else: # 1 or 0(1はそもそも連接ではない)
     noun_connect = []
     continue
 
