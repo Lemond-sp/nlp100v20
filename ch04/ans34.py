@@ -37,6 +37,7 @@ verb_dict = []
 sentence_dict = itertools.chain.from_iterable(text_dict)
 # 名詞の連接
 noun_connect = []
+
 # 一覧
 noun_seq = []
 for sentence in sentence_dict:
