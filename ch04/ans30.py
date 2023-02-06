@@ -13,12 +13,13 @@ mecabの出力フォーマット
 import re
 #指定された要素を全て削除(したものを別リストに格納)
 def main():
-    
+
   with open('./neko.txt.mecab','r') as f:
     text_dict = []
     sentence_dict = []
     # f.read:改行も含めた文字列
-    # f.readlines:改行コードを区切って１行ごとに分解されたリスト
+    # f.readlines:改行コードを区切って１行ごとに分解されたリスト(元のデータ量が多いとCPUに乗らない可能性)
+    # for line in f: だと一行ずつ乗るため、メモリに優しい
     for line in f.readlines():
       if line == '\n':
         continue
