@@ -29,12 +29,12 @@ def main():
         if node[0] == '':
           continue
         # surface 以外はnode[1]
-        feature = node[1].split(',')
+        features = node[1].split(',')
         word_dict = {
           "surface":node[0],
-          "base":feature[6],
-          "pos":feature[0],
-          "pos1":feature[1]
+          "base":features[6],
+          "pos":features[0],
+          "pos1":features[1]
         }
         sentence_dict.append(word_dict)
       # 追加
