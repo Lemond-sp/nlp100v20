@@ -10,7 +10,9 @@ import gensim
 from gensim.models import KeyedVectors
 
 def main():
+  # load model
   model = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
+  
   with open('questions-words.txt') as f,\
     open('ans64.txt','w') as fw:
     for line in tqdm(f):
@@ -27,7 +29,7 @@ def main():
       fw.write(ans + "\n")
     
 def get_cosine_similarity(model,words,k=1):
-  cossims = model.most_similar(positive=[words[1],words[2]], negative=[words[0]], topn=k)
+  cossims = model.most_similar(positive=[words[1],words[2]], negative=[words[0]], topn=k) # tuple in list
   
   return cossims[0][0],cossims[0][1]
 
