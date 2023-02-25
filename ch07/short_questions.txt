@@ -1,0 +1,10 @@
+: capital-common-countries
+Athens Greece Baghdad Iraq
+Athens Greece Bangkok Thailand
+Athens Greece Beijing China
+Athens Greece Berlin Germany
+Athens Greece Bern Switzerland
+Athens Greece Cairo Egypt
+Athens Greece Canberra Australia
+Athens Greece Hanoi Vietnam
+Athens Greece Havana Cuba
