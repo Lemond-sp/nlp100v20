@@ -32,7 +32,6 @@ def main():
       
       # 文法的アナロジー
       else:
-        # 意味的アナロジー
         if len(words) > 2:
           syntactic.append(words[3] == words[4])
       
