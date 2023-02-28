@@ -15,22 +15,35 @@ from gensim.models import KeyedVectors
 def main():
   # load model
   model = KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True)
-  
-  with open('questions-words.txt') as f,\
-    open('ans64.txt','w') as fw:
+  semantic = []
+  syntactic = []
+  flag = True
+  with open('ans64.txt') as f:
     for line in tqdm(f):
       words = line.split()
       
-      if words[0] == ":":
-        ans = " ".join(words)
+      # 意味的アナロジー
+      if flag:
+        if words[0] == ":" and "gram" in words[1]: # 意味的アナロジーではない行に達した
+          flag = False
+        elif len(words) > 2:
+          # 正解率
+          semantic.append(words[3] == words[4])
+      
+      # 文法的アナロジー
       else:
-        #print(len(words),words)
-        most_sim ,cossim = get_cosine_similarity(model,words,1)
-        cossim = str(cossim)
-        words.extend([most_sim,cossim])
-        ans = " ".join(words)
-      fw.write(ans + "\n")
-    
+        # 意味的アナロジー
+        if len(words) > 2:
+          syntactic.append(words[3] == words[4])
+      
+    print(f'意味的アナロジー : {sum(semantic) / len(semantic)}% \n,\
+            文法的アナロジー : {sum(syntactic) / len(syntactic)}%')
+"""
+words[3] : 正解
+words[4] : predict
+意味的アナロジー : 0.7308602999210734% 
+文法的アナロジー : 0.7400468384074942%
+"""
 def get_cosine_similarity(model,words,k=1):
   cossims = model.most_similar(positive=[words[1],words[2]], negative=[words[0]], topn=k) # tuple in list
   
