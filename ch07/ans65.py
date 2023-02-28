@@ -4,7 +4,7 @@
 semantic analogy  : カテゴリ名に「gram」以外
 syntactic analogy : カテゴリ名に「gram」
 https://tomowarkar.github.io/blog/posts/nlp100-07/#65-アナロジータスクでの正解率
-出力結果との正解率を算出する。
+出力結果との正解率を算出する
 """
 
 import pandas as pd
