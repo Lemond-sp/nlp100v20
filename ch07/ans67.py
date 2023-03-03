@@ -18,7 +18,7 @@ def main():
   model = KeyedVectors.load_word2vec_format('contents/GoogleNews-vectors-negative300.bin', binary=True)
   with open('contents/country.txt') as f:
     for line in f:
-      country_name = line.split('　　')[1]
+      country_name = line.split('　　')[1] # issue
       country_name = country_name.strip()
       country_name = country_name.replace(' ','_')
       w2v(model,country_name,country_list,country_vec)
