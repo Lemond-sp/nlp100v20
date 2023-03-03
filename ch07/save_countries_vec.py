@@ -27,7 +27,7 @@ def main():
     pickle.dump(country_vec,p)
   with open('contents/countries_names.bin','wb') as p:
     pickle.dump(country_list,p)
-  print(f'単語ベクトル数 : {COUNTRY_NUM} --> {len(country_list)}')
+  print(f'単語ベクトル数 : {COUNTRY_NUM} --> {len(country_list)}') # 193 --> 169
 # KeyErrorに該当した国名は除外
 def w2v(model,word,word_list,vec_list):
   try:
