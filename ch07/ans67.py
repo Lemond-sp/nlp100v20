@@ -42,3 +42,16 @@ def w2v(model,word,word_list,vec_list):
   vec_list.append(model[word])
 if __name__ == "__main__":
   main()
+
+"""
+cluster 0
+Afghanistan, Armenia, Australia, Azerbaijan, Bahrain, Bangladesh, Bhutan, Brunei_Darussalam, Cambodia, China, Egypt, Georgia, India, Indonesia, Iran, Iraq, Israel, Japan, Jordan, Kazakhstan, Kuwait, Kyrgyzstan, Lebanon, Libya, Malaysia, Mongolia, Morocco, Myanmar, Nepal, Oman, Pakistan, Philippines, Qatar, Saudi_Arabia, Singapore, Sri_Lanka, Syria, Tajikistan, Thailand, Turkey, Turkmenistan, United_Arab_Emirates, Uzbekistan, Viet_Nam, Yemen
+cluster 1
+Algeria, Angola, Benin, Botswana, Burkina_Faso, Burundi, Cameroon, Chad, Djibouti, Equatorial_Guinea, Eritrea, Ethiopia, Gabon, Gambia, Ghana, Guinea, Kenya, Lesotho, Liberia, Madagascar, Malawi, Mali, Mauritania, Mozambique, Namibia, Niger, Nigeria, Rwanda, Senegal, Sierra_Leone, Somalia, South_Africa, Sudan, Togo, Tunisia, Uganda, Zambia, Zimbabwe
+cluster 2
+Albania, Andorra, Argentina, Austria, Belarus, Belgium, Bulgaria, Canada, Croatia, Cyprus, Czech_Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Malta, Monaco, Montenegro, Netherlands, Norway, Paraguay, Poland, Portugal, Romania, San_Marino, Serbia, Slovakia, Slovenia, Spain, Sweden, Switzerland, Ukraine, United_Kingdom, Uruguay
+cluster 3
+Cabo_Verde, Comoros, Fiji, Kiribati, Maldives, Marshall_Islands, Mauritius, Nauru, New_Zealand, Palau, Samoa, Seychelles, Solomon_Islands, Tonga, Tuvalu, Vanuatu
+cluster 4
+Bahamas, Barbados, Belize, Bolivia, Brazil, Chile, Colombia, Costa_Rica, Cuba, Dominica, Dominican_Republic, Ecuador, El_Salvador, Grenada, Guatemala, Guyana, Haiti, Honduras, Jamaica, Mexico, Nicaragua, Panama, Peru, Saint_Lucia, Suriname, Venezuela
+"""
