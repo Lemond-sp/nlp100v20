@@ -10,7 +10,7 @@ FORMAT: ID \t TITLE \t URL \t PUBLISHER \t CATEGORY \t STORY \t HOSTNAME \t TIME
 TITLE : ニュースの見出し
 CATEGORY	News category (b = business, t = science and technology, e = entertainment, m = health)
 '''
-df = pd.read_csv('NewsAggregatorDataset/newsCorpora.csv',\
+df = pd.read_csv('contents/newsCorpora.csv',\
   names=['id','title','url','publisher','category','story','hostname','timestamp']\
     ,sep='\t')
 
@@ -30,9 +30,9 @@ test,dev = train_test_split(test,test_size=0.5,random_state=42,stratify=test['ca
 # dataframe to txt
 # sep='\t'
 
-train['category'] = train['category'].map({'b': 0, 'e': 1, 't': 2, 'm': 3})
-test['category'] = test['category'].map({'b': 0, 'e': 1, 't': 2, 'm': 3})
-dev['category'] = dev['category'].map({'b': 0, 'e': 1, 't': 2, 'm': 3})
+train['category'] = train['category'].map({'b': 0, 't': 1, 'e': 2, 'm': 3})
+test['category'] = test['category'].map({'b': 0, 't': 1, 'e': 2, 'm': 3})
+dev['category'] = dev['category'].map({'b': 0, 't': 1, 'e': 2, 'm': 3})
 
 train.to_csv('train.txt',columns=['category','title'],sep='\t',index=False, header=None)
 test.to_csv('test.txt',columns=['category','title'],sep='\t',index=False, header=None)
