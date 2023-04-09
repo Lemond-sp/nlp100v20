@@ -15,11 +15,17 @@ def main():
     f = open('contents/text_train.txt')
     train_data = f.read()
     train_data = train_data.split('\n')
-    del train_data[10673]
+    del train_data[10672]
     for i in range(len(train_data)):
         train_data[i] = train_data[i].split(' ')
-def data_load(filename)
+    for seq in train_data:
+        
+    train_data = np.array(train_data)
+    print(train_data.shape)
+    
 # Sentence to vector
+def s2v(words):
+    
 # words    
 # def s2v(words)
 if __name__ == "__main__":
