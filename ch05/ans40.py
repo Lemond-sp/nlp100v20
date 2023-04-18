@@ -15,25 +15,29 @@ class Morph:
     self.pos = attr[0]
     self.pos1 = attr[1]
 
-filename = 'ai.ja/ai.ja.txt.parsed'
-sentence = []
-ans = []
+def main():
+  filename = 'ai.ja/ai.ja.txt.parsed'
+  sentence = []
+  ans = []
 
-# mode='r'(default)
-with open(filename) as f:
-  for block in f:
-    if block[0] == "*": # *の場合、次の行へ
-      continue
-    # 対象
-    elif block != "EOS\n":
-      ans.append(Morph(block))
-    # 空リストではない
-    elif ans:
-      sentence.append(ans)
-      ans = []
+  # mode='r'(default)
+  with open(filename) as f:
+    for block in f:
+      if block[0] == "*": # *の場合、次の行へ
+        continue
+      # 対象
+      elif block != "EOS\n":
+        ans.append(Morph(block))
+      # 空リストではない
+      elif ans:
+        sentence.append(ans)
+        ans = []
 
-# 確認
-# vars(x):オブジェクトxの__dic__属性を辞書で返す
-# dict属性には、プロパティの名前と対応付けられている値が入る
-for i in sentence[1]:
-  print(vars(i))
+  # 確認
+  # vars(x):オブジェクトxの__dic__属性を辞書で返す
+  # dict属性には、プロパティの名前と対応付けられている値が入る
+  for i in sentence[1]:
+    print(vars(i))
+
+if __name__ == "__main__":
+    main()
