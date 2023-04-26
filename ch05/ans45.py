@@ -1,7 +1,7 @@
 '''
 動詞を述語，動詞に係っている文節の助詞を格と考え，述語と格をタブ区切り形式で出力せよ．
 ・動詞を含む文節において，最左の"動詞の基本形"を述語とする
-・述語に係る"助詞"を格とする
+・述語に係る"助詞"を格とする(chunk.dst,srcs)
 ・述語に係る助詞（文節）が複数あるときは，すべての助詞をスペース区切りで辞書順に並べる
 '''
 # 文節
@@ -43,6 +43,7 @@ sentences = []
 chunks = []
 morphs = []
 
+# collect
 with open(filename) as f:
   for block in f:
     # Add Chunk
@@ -71,22 +72,26 @@ with open(filename) as f:
 + 名詞から動詞
 '''
 
-with open("./result45.txt", "w") as f:
+with open("./res45.txt", "w") as f:
   for i in range(len(sentences)):
     for chunk in sentences[i].chunks:
-      for morph in chunk.morphs:
+      for morph in chunk.morphs: # 左から
+
         if morph.pos == "動詞": 
-          particles = []
-          for src in chunk.srcs:
-            particles += [morph.base for morph in sentences[i].chunks[src].morphs if morph.pos == "助詞"]
+          particles = [] # 述語に係る助詞（格）
+          for src in chunk.srcs: # 「述語に'係っている'」係り元文節から助詞を取得
+            particles += [morph.surface for morph in sentences[i].chunks[src].morphs if morph.pos == "助詞"]
           if len(particles) > 1:
-            particles = set(particles)
-            particles = sorted(list(particles))
-            form = " ".join(particles)
-            print(f"{morph.base}\t{form}", file=f)
+            set_part = set(particles)
+            set_part = sorted(list(set_part))
+            set_part = " ".join(set_part)
+            ans = "\t".join([morph.base,set_part])
+            f.write(ans + "\n")
 
 '''
-cat ./result45.txt | sort |uniq -c | sort -nr |head -n 5
-cat ./result45.txt |grep '行う'| sort |uniq -c | sort -nr |head -n 5
+cat ./res45.txt | sort |uniq -c | sort -nr |head -n 5
+cat ./res45.txt |grep '行う'| sort |uniq -c | sort -nr |head -n 5
 
+uniq -c : 重複した行数を表示
+sort -nr : 降順
 '''
