@@ -5,7 +5,7 @@ from torch import nn
 
 def main():
     contents_path = 'contents/features/test_vec.npy'
-    x_train = np.load(contents_path,allow_pickle=True)
+    x_train = np.load(contents_path,allow_pickle=True) # dtypeがobjectの場合 allow_pickle=True
     x_train = x_train.tolist()
     x_train = np.array(x_train)
     x_train = torch.tensor(x_train,requires_grad=True)
