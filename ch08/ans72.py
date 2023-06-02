@@ -15,8 +15,7 @@ def main():
     
     # # 損失
     criterion = nn.CrossEntropyLoss()
-    contents_path = 'contents/output'
-    t = np.load(os.path.join(contents_path,'../features/bi-data/train_label.npy')) # float64,(N,)
+    t = np.load(os.path.join(contents_path,'features/bi-data/train_label.npy')) # float64,(N,)
     t = torch.LongTensor(t) # 64bit符号付き整数
     t1 = t[0]
     t2 = t[0:4]
