@@ -14,7 +14,7 @@ def main():
     
     # 損失
     loss = nn.CrossEntropyLoss()
-    x1 = x_train[0][:] # スライスすると，x1が末端変数でないからgradがnoneになる
+    x1 = x_train[0][:] # スライスすると，x1が末端変数でない(grad_fn=SliceBackward)からgradがnoneになる
     x2 = x_train[0:4][:] # is_leafで末端のテンソルかどうか確認
     # 逆伝搬時に末端以外のテンソルの微分係数の記録を可能にする
     x1.retain_grad()
