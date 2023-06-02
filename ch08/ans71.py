@@ -4,7 +4,7 @@ import torch
 from torch import nn
 
 def main():
-    contents_path = 'contents/features/train_vec.npy'
+    contents_path = 'contents/features/bi-data/train_vec.npy'
     x_train = np.load(contents_path,allow_pickle=True) # dtypeがobjectの場合 allow_pickle=True
     x_train = x_train.tolist()
     x_train = np.array(x_train)
@@ -18,6 +18,7 @@ def main():
     ans = s(xW)
     print(ans,ans[0:4][:],sep='\n') # 事例1~4までの出力結果も
 
+    torch.save(ans,'contents/output/ans71.pt')
 if __name__ == "__main__":
     main()
 
