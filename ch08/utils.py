@@ -1,6 +1,8 @@
 import numpy as np
 import os
 from typing import List
+import torch
+import torch.nn as nn
 
 # def main():
 #     for i in ["label.dev.txt","label.train.txt","text.dev.txt","text.test.txt","text.train.txt"]:
@@ -17,8 +19,13 @@ def sep_list(data: List):
     for i,seq in enumerate(data):
         data[i] = seq.split(' ')
     return data
-# x_test = load_data('/home/kajikawa_r/nlp100v20/ch08/contents/','text_test.txt')
 
-# print(len(x_test))
-# if __name__ == "__main__":
-#     main()
+class Net(nn.Module):
+    def __init__(self,input_size,feature_num):
+        super().__init__()
+        self.fc = nn.Linear(input_size,feature_num) # 重み初期化はデフォルトでinit.kaiming_uniform_(self.weight, a=math.sqrt(5))
+    
+    def forward(self,x):
+        x = self.fc(x)
+        return x
+        
