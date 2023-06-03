@@ -1,12 +1,16 @@
 # 確率的勾配降下法
 # 重み行列を学習
 import os
+from tqdm import tqdm
 import numpy as np
+import matplotlib.pyplot as plt
+import japanize_matplotlib
 import torch
 from torch import nn
 from torch.utils.data import TensorDataset
 from torch.utils.data import DataLoader
 import torch.optim as optim
+from sklearn.metrics import accuracy_score
 from utils import Net
 import pickle
 
@@ -26,14 +30,17 @@ def main():
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(net.parameters(), lr=0.01)
     criterion = nn.CrossEntropyLoss()
-    max_epoch = 30
+    max_epoch = 3
     eps = 1e-6
     eps = torch.tensor(eps)
     train_ep_loss = [] # エポックごとの損失値
-    val_ep_loss = []
-    for epoch in range(max_epoch):
-        train_losses = list()
-
+    test_ep_loss = []
+    train_ep_acc = []
+    test_ep_acc = []
+    for epoch in tqdm(range(max_epoch)):
+        train_losses = []
+        train_pred = []
+        train_true = []
         # ミニバッチ学習
         for batch in train_loader:
 
@@ -47,6 +54,8 @@ def main():
             optimizer.zero_grad()
             # 順伝播
             y = net(x)  # 赤色の部分
+            train_pred.extend(y)
+            train_true.extend(t)
             loss = criterion(y, t)  # 緑色の部分
             train_losses.append(loss)
             print(f'{epoch}epoch | loss:{loss}')
@@ -56,25 +65,33 @@ def main():
         
         # 更新と切り離し、検証データの性能を確認
         with torch.no_grad():
-            val_losses = list()
-            for batch in val_loader:
+            test_losses = []
+            test_pred = []
+            test_true = []
+            for batch in test_loader:
                 x, t = batch  # 黄色の部分
                 x = x.to(device)
                 t = t.to(device)
                 y = net(x)  # 赤色の部分
                 print(f' true = {t}')
-                #print(f'pred.shape={y.shape} : true.shape = {t.shape}')
-                #exit()
+                test_pred.extend(y.to('cpu').tolist())
+                test_true.extend(t.tolist())
+                
                 loss = criterion(y, t)  # 緑色の部分
-                val_losses.append(loss)
+                test_losses.append(loss)
         train_loss = torch.tensor(train_losses).mean()
         train_ep_loss.append(train_loss)
-        val_loss = torch.tensor(val_losses).mean()
-        val_ep_loss.append(val_loss)
+        train_ep_acc.append(accuracy_score(train_true,train_pred))
+        test_loss = torch.tensor(test_losses).mean()
+        test_ep_loss.append(test_loss)
+        test_ep_acc.append(accuracy_score(test_true,test_pred))
+
         print("Epoch: %02d  train_loss: %.3f" % (epoch+1, train_loss))
-        print("Epoch: %02d  val_loss: %.3f" % (epoch+1, val_loss))
+        print("Epoch: %02d  test_loss: %.3f" % (epoch+1, test_loss))
     
     # 正解率・損失値保存
+    print(f'train{train_ep_acc} | {train_ep_loss}')
+    print(f'test{test_ep_acc} | {test_ep_loss}')
     
     torch.save(net.state_dict(),'contents/output/ans73-model.pt')
     print('重みW 学習後')
