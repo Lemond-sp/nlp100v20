@@ -3,6 +3,7 @@ import os
 from typing import List
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 # def main():
 #     for i in ["label.dev.txt","label.train.txt","text.dev.txt","text.test.txt","text.train.txt"]:
@@ -20,6 +21,7 @@ def sep_list(data: List):
         data[i] = seq.split(' ')
     return data
 
+# 単層ニューラルネット
 class Net(nn.Module):
     def __init__(self,input_size,feature_num):
         super().__init__()
@@ -27,6 +29,21 @@ class Net(nn.Module):
     
     def forward(self,x):
         x = self.fc(x)
+        return x
+
+# 多層ニューラルネット(ans79)
+class MNet(nn.Module):
+
+    def __init__(self,input_size,feature_num):
+        super(Net, self).__init__()
+        self.fc1 = nn.Linear(input_size,100)
+        self.fc2 = nn.Linear(100, feature_num)
+        self.fc3 = nn.Linear(feature_num, 3)
+
+    def forward(self, x):
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
         return x
 
 # チェックポイントの保存(ans76)
