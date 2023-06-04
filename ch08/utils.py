@@ -28,4 +28,14 @@ class Net(nn.Module):
     def forward(self,x):
         x = self.fc(x)
         return x
-        
+
+# チェックポイントの保存(ans76)
+def save_checkpoint(model,optimizer,filename,epoch):
+    if filename.endswith('.pt') or filename.endswith('.pth'):
+        # saveはdictも保存できる
+        torch.save({
+            'epoch' : epoch,
+            'model_state_dict' : model.state_dict(),
+            'optimizer_state_dict' : optimizer.state_dict(),
+        },
+        filename)
