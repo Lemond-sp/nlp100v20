@@ -21,19 +21,20 @@ def main():
     net = Net(300,feature_num=feature_num)
     net.load_state_dict(torch.load('contents/output/ans73-model.pt'))
 
-    y_test = np.load(os.path.join(contents_path,'features/bi-data/test_label.npy')) # float64,(N,)
-    y_test = torch.LongTensor(y_test) # 64bit符号付き整数
     y_train = np.load(os.path.join(contents_path,'features/bi-data/train_label.npy')) # float64,(N,)
     y_train = torch.LongTensor(y_train) # 64bit符号付き整数
+    y_test = np.load(os.path.join(contents_path,'features/bi-data/test_label.npy')) # float64,(N,)
+    y_test = torch.LongTensor(y_test) # 64bit符号付き整数
 
-    outputs = net(x_test) # torch.Size([1334, 4])
-    test_preds = torch.argmax(outputs,dim=1)
-    test_preds = test_preds.numpy()
-    print(accuracy_score(y_test,test_preds))
+    # 推論
     outputs = net(x_train) # torch.Size([1334, 4])
     train_preds = torch.argmax(outputs,dim=1)
     train_preds = train_preds.numpy()
     print(accuracy_score(y_train,train_preds))
+    outputs = net(x_test) # torch.Size([1334, 4])
+    test_preds = torch.argmax(outputs,dim=1)
+    test_preds = test_preds.numpy()
+    print(accuracy_score(y_test,test_preds))
 
 if __name__ == "__main__":
     main()
