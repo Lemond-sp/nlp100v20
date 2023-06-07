@@ -12,10 +12,7 @@ def main():
     contents_path = 'contents'
     x_train = torch.load(os.path.join(contents_path,'output/x_train.pt'))
     x_train.retain_grad() # 逆伝搬時に末端以外のテンソルの微分係数の記録を可能にする
-    x_test = np.load(os.path.join(contents_path,'features/bi-data/test_vec.npy'),allow_pickle=True) # dtypeがobjectの場合 allow_pickle=True
-    x_test = x_test.tolist()
-    x_test = np.array(x_test)
-    x_test = torch.tensor(x_test,requires_grad=True).float()
+    x_test = torch.load(os.path.join(contents_path,'output/x_test.pt'))
     x_test.retain_grad()
 
     feature_num = 4
