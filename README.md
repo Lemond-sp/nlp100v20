@@ -7,3 +7,6 @@
 - gensim 4.3.0
 
 Welcome to Issues・Discussions !
+
+## memo
+- chapter09よりflake8,blackによるformatterとlinterを使用
