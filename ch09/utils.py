@@ -40,9 +40,9 @@ class RNN(nn.Module):
         )
         self.softmax = nn.Softmax(dim=1)
 
-    def forward(self, x, h_0=0):
+    def forward(self, x):
         x = self.embed(x)
-        x, h_t = self.rnn(x, h_0)
+        x, h_t = self.rnn(x)
         x = x[:, -1, :]
         x = self.fc(x)
         x = self.softmax(x)
