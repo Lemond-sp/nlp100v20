@@ -1,4 +1,4 @@
-fairseq-train contents/ans95.bin \
+CUDA_VISIBLE_DEVICES=0,1,2 fairseq-train contents/ans95.bin \
   --save-dir contents/results/base/ans96 \
   --tensorboard-logdir contents/results/base/log96 \
   --task translation \
