@@ -5,6 +5,7 @@
 - mecab 0.996
 - sklearn 0.24.1
 - gensim 4.3.0
+- fairseq 0.12.2
 
 Welcome to Issues・Discussions !
 
